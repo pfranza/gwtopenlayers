@@ -26,5 +26,19 @@ public class Size {
 		this.width = width;
 		this.height = height;
 	}
+
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		return new Size(width, height);
+	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Size) {
+			Size s = (Size) obj;
+			return s.width == width && s.height == height;
+		}
+		
+		return false;
+	}
 }
