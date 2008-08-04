@@ -27,8 +27,7 @@ public class Size {
 		this.height = height;
 	}
 
-	@Override
-	protected Object clone() throws CloneNotSupportedException {
+	public Size clone() {
 		return new Size(width, height);
 	}
 	
