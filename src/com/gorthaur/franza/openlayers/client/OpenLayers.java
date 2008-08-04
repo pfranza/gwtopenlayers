@@ -19,11 +19,13 @@ public class OpenLayers implements EntryPoint {
 	public void onModuleLoad() {
 		fixSize();
 		Window.enableScrolling(false);
-		MapWidget map = new MapWidget(false);
+		MapWidget map = new MapWidget(false, true);
 			map.getMap().addLayer(new Google(Google.TYPE.SATELLITE, "Overview", false));
-			map.getMap().setZoomLevel(15);
+			
+			map.getOverviewMap().getMap().addLayer(new Google(Google.TYPE.NORMAL, "Overview", true));
+			map.getOverviewMap().setPixelSize(250, 150);
+			map.getMap().setZoomLevel(10);
 			map.getMap().panTo(new LonLat(18, 34));
-
 
 		RootPanel.get().add(map);
 		Timer t = new Timer() {
@@ -47,7 +49,6 @@ public class OpenLayers implements EntryPoint {
 
 	private void fixSize() {
 		RootPanel.get().setSize(Window.getClientWidth() + "px", Window.getClientHeight() + "px");
-		System.out.println("Size Fixed");
 	}
 	
 }
