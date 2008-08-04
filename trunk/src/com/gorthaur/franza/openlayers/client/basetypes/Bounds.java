@@ -21,11 +21,27 @@ public class Bounds {
 
 	@Override
 	public String toString() {
-		return jsToString(object);
+		return _toString(object);
 	}
 
-	private native String jsToString(JavaScriptObject x) /*-{
+	private native String _toString(JavaScriptObject x) /*-{
 		return x.toString();
+	}-*/;
+	
+	public double getWidth() {
+		return _getWidth(object);
+	}
+
+	private native double _getWidth(JavaScriptObject x)/*-{
+		return x.getWidth();
+	}-*/;
+	
+	public double getHeight() {
+		return _getHeight(object);
+	}
+
+	private native double _getHeight(JavaScriptObject x)/*-{
+		return x.getHeight();
 	}-*/;
 	
 }

@@ -7,24 +7,18 @@ import com.google.gwt.junit.client.GWTTestCase;
  */
 public class BoundsTest extends GWTTestCase {
 
-  /**
-   * Must refer to a valid module that sources this class.
-   */
-  public String getModuleName() {
-    return "com.gorthaur.franza.openlayers.OpenLayers";
-  }
 
-  /**
-   * Add as many tests as you like.
-   */
-  public void testSimple() {
-    assertTrue(true);
-  }
-  
+	public String getModuleName() {
+		return "com.gorthaur.franza.openlayers.OpenLayers";
+	}
+
 	public void testLatLonExtends() throws Exception {
 		Bounds b = new Bounds();
 		b.extend(new LonLat(5, 4));
 		assertEquals("left-bottom=(4,5) right-top=(4,5)", b.toString());
+		b.extend(new LonLat(7, 6));
+		assertEquals(2.0, b.getWidth());
+		assertEquals(2.0, b.getHeight());
 	}
 
 }
