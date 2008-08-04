@@ -8,14 +8,21 @@ public class MapWidget extends SimplePanel {
     private Map map;
     private static int idx = 1;
     
-    public MapWidget(boolean isSphericalMercator) {
+    private OverViewMap overview;
+    
+    public MapWidget(boolean isSphericalMercator, boolean hasOverViewMap) {
     	super(DOM.createDiv());
-        	super.getElement().setId("MapWidget-" + (idx++));;
+        	super.getElement().setId("MapWidget-" + (idx++));
         this.map = new Map(super.getElement(), isSphericalMercator);
         setSize("100%", "100%");
+        if(hasOverViewMap) {
+        	overview = new OverViewMap(this);
+        	DOM.appendChild(getElement(), overview.getElement());
+        }
     }
     
-    public Map getMap() {
+
+	public Map getMap() {
         return this.map;
     }
     
@@ -24,5 +31,10 @@ public class MapWidget extends SimplePanel {
         this.map.redraw();
     }
     
+    public OverViewMap getOverviewMap() {
+    	return overview;
+    }
+    
+
 }
 
