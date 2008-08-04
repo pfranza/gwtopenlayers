@@ -1,17 +1,18 @@
 package com.gorthaur.franza.openlayers.client;
 
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.SimplePanel;
 
-public class MapWidget extends Widget {
+public class MapWidget extends SimplePanel {
 
-    private final Map map;
+    private Map map;
+    private static int idx = 1;
     
     public MapWidget(boolean isSphericalMercator) {
-        Element mapDomElement = DOM.createDiv();
-        this.setElement(mapDomElement);
-        this.map = new Map(mapDomElement, isSphericalMercator);
+    	super(DOM.createDiv());
+        	super.getElement().setId("MapWidget-" + (idx++));;
+        this.map = new Map(super.getElement(), isSphericalMercator);
+        setSize("100%", "100%");
     }
     
     public Map getMap() {
@@ -22,5 +23,6 @@ public class MapWidget extends Widget {
         super.onLoad();
         this.map.redraw();
     }
+    
 }
 
