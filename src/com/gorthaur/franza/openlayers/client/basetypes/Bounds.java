@@ -7,7 +7,7 @@ public class Bounds {
 	private JavaScriptObject object = createBounds();
 	
 	private native JavaScriptObject createBounds() /*-{
-		return new OpenLayers.Bounds();
+		return new $wnd.OpenLayers.Bounds();
 	}-*/;
 	
 	
@@ -16,7 +16,7 @@ public class Bounds {
 	}
 	
 	private native void extendLonLat(JavaScriptObject x, double lon, double lat) /*-{
-		x.extend(new OpenLayers.LonLat(lon, lat));
+		x.extend(new $wnd.OpenLayers.LonLat(lon, lat));
 	}-*/;
 
 	@Override

@@ -23,9 +23,8 @@ public class BoundsTest extends GWTTestCase {
   
 	public void testLatLonExtends() throws Exception {
 		Bounds b = new Bounds();
-			b.extend(new LonLat(5, 4));
-		
-//			assertEquals("", b.toString());
+		b.extend(new LonLat(5, 4));
+		assertEquals("left-bottom=(4,5) right-top=(4,5)", b.toString());
 	}
 
 }
