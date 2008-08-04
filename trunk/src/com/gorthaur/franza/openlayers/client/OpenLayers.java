@@ -5,7 +5,10 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.gorthaur.franza.openlayers.client.Map.MapClickListener;
 import com.gorthaur.franza.openlayers.client.basetypes.LonLat;
+import com.gorthaur.franza.openlayers.client.controls.NavToolBar;
+import com.gorthaur.franza.openlayers.client.controls.OverviewMap;
 import com.gorthaur.franza.openlayers.client.layers.Google;
 
 /**
@@ -19,14 +22,17 @@ public class OpenLayers implements EntryPoint {
 	public void onModuleLoad() {
 		fixSize();
 		Window.enableScrolling(false);
-		MapWidget map = new MapWidget(false, true);
-			map.getMap().addLayer(new Google(Google.TYPE.SATELLITE, "Overview", false));
-			
-			map.getOverviewMap().getMap().addLayer(new Google(Google.TYPE.NORMAL, "Overview", true));
-			map.getOverviewMap().setPixelSize(250, 150);
-			map.getMap().setZoomLevel(10);
+		final MapWidget map = new MapWidget(false);
+		
+			map.getMap().addLayer(new Google(Google.TYPE.SATELLITE, "Overview", false), true);			
+			map.getMap().setZoomLevel(4);
 			map.getMap().panTo(new LonLat(18, 34));
-
+			OverviewMap ov = new OverviewMap();
+			map.getMap().addControl(ov);
+			map.getMap().addControl(new NavToolBar());
+			
+			ov.addControl(new NavToolBar());
+			
 		RootPanel.get().add(map);
 		Timer t = new Timer() {
 
