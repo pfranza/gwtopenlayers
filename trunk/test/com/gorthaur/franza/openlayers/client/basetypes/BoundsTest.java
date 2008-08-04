@@ -1,17 +1,12 @@
 package com.gorthaur.franza.openlayers.client.basetypes;
 
-import com.google.gwt.junit.client.GWTTestCase;
+import com.gorthaur.franza.openlayers.client.BaseTest;
 import com.gorthaur.franza.openlayers.client.geometry.Point;
 
 /**
  * GWT JUnit tests must extend GWTTestCase.
  */
-public class BoundsTest extends GWTTestCase {
-
-
-	public String getModuleName() {
-		return "com.gorthaur.franza.openlayers.OpenLayers";
-	}
+public class BoundsTest extends BaseTest {
 
 	public void testExtendPoint() {
 		Bounds b = new Bounds();

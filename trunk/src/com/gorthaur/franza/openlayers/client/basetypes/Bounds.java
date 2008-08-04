@@ -5,6 +5,8 @@ import com.gorthaur.franza.openlayers.client.geometry.Point;
 
 public class Bounds {
 
+	//Wrapped From http://dev.openlayers.org/releases/OpenLayers-2.6/doc/apidocs/files/OpenLayers/BaseTypes/Bounds-js.html
+	
 	private JavaScriptObject object = createBounds();
 	
 	private native JavaScriptObject createBounds() /*-{

@@ -26,6 +26,24 @@ public class Pixel {
 		this.y = y;
 	}
 	
+	public final void add(Pixel p) {
+		x += p.x;
+		y += p.y;
+	}
 	
+	public final void offset(Pixel p) {
+		x -= p.x;
+		y -= p.y;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Pixel) {
+			Pixel o = (Pixel) obj;
+			return o.x == x && o.y == y;
+		}
+		
+		return false;
+	}
 	
 }
