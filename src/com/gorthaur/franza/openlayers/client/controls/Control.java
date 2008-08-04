@@ -1,16 +1,17 @@
-package com.gorthaur.franza.openlayers.client.layers;
+package com.gorthaur.franza.openlayers.client.controls;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-public abstract class Layer {
-	
+public class Control {
+
 	private JavaScriptObject obj;
 	
-	public Layer(JavaScriptObject o) {
+	public Control(JavaScriptObject o) {
 		this.obj = o;
 	}
 	
 	public JavaScriptObject getJsObject() {
 		return obj;
 	}
+	
 }
