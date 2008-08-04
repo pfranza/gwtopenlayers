@@ -142,4 +142,8 @@ public class BoundsTest extends GWTTestCase {
 	public void testWrapDateline() throws Exception {
 		fail("Not Implemented");
 	}
+	
+	public void testToGeometry() throws Exception {
+		fail("Not Implemented");
+	}
 }
