@@ -42,11 +42,13 @@ public class Map {
             numZoomLevels: totalNumZoomLevels,
             projection: new $wnd.OpenLayers.Projection("EPSG:900913"),
             displayProjection: new $wnd.OpenLayers.Projection("EPSG:4326"),
-            units: "m"
+            units: "m",
+            controls: []
         };
     } else {
         mapOptions = {
-            numZoomLevels: totalNumZoomLevels
+            numZoomLevels: totalNumZoomLevels,
+            controls: []
         };
     }
 
