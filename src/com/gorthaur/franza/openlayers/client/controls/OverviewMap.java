@@ -5,13 +5,18 @@ import com.gorthaur.franza.openlayers.client.layers.Layer;
 
 public class OverviewMap extends Control {
 
-	public OverviewMap() {
-		super(_newInstance(256, 256));
+	public OverviewMap(Layer layer) {
+		super(_newInstance(256, 256, layer.getJsObject()));
 	}
 
-	private native static JavaScriptObject _newInstance(int width, int height)/*-{     
-    	var options = {'size': new $wnd.OpenLayers.Size(width, height)};
-    	return new $wnd.OpenLayers.Control.OverviewMap();;
+	private native static JavaScriptObject _newInstance(int width, int height, JavaScriptObject layer)/*-{     
+    	var options = {
+    		layers: [layer],
+    	    projection: "EPSG:26912",
+        	units: 'm',
+        	maxExtent: new $wnd.OpenLayers.Bounds(455402, 4967657, 473295, 4984095)
+    	};
+    	return new $wnd.OpenLayers.Control.OverviewMap(options);
 	}-*/; 
 	
 	private native static void addControl(JavaScriptObject o, JavaScriptObject c) /*-{
