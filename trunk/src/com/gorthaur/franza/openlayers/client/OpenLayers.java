@@ -5,10 +5,10 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.gorthaur.franza.openlayers.client.Map.MapClickListener;
 import com.gorthaur.franza.openlayers.client.basetypes.LonLat;
 import com.gorthaur.franza.openlayers.client.controls.NavToolBar;
 import com.gorthaur.franza.openlayers.client.controls.OverviewMap;
+import com.gorthaur.franza.openlayers.client.controls.PanZoomBar;
 import com.gorthaur.franza.openlayers.client.layers.Google;
 
 /**
@@ -22,7 +22,7 @@ public class OpenLayers implements EntryPoint {
 	public void onModuleLoad() {
 		fixSize();
 		Window.enableScrolling(false);
-		final MapWidget map = new MapWidget(false);
+		final MapWidget map = new MapWidget(true);
 		
 			map.getMap().addLayer(new Google(Google.TYPE.SATELLITE, "Overview", false), true);			
 			map.getMap().setZoomLevel(4);
@@ -30,8 +30,10 @@ public class OpenLayers implements EntryPoint {
 			OverviewMap ov = new OverviewMap();
 			map.getMap().addControl(ov);
 			map.getMap().addControl(new NavToolBar());
+			map.getMap().addControl(new PanZoomBar());
 			
 			ov.addControl(new NavToolBar());
+			ov.addLayer(new Google(Google.TYPE.HYBRID, "Overview",  true));
 			
 		RootPanel.get().add(map);
 		Timer t = new Timer() {
