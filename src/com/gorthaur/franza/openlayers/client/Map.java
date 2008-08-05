@@ -40,17 +40,13 @@ public class Map {
     if(isSphericalMercator) {
         mapOptions = {
             numZoomLevels: totalNumZoomLevels,
-            controls: [],
             projection: new $wnd.OpenLayers.Projection("EPSG:900913"),
             displayProjection: new $wnd.OpenLayers.Projection("EPSG:4326"),
-            units: "m",
-            maxResolution: 156543.0339,
-            maxExtent: new $wnd.OpenLayers.Bounds(-20037508.34, -20037508.34, 20037508.34, 20037508.34)
+            units: "m"
         };
     } else {
         mapOptions = {
-            numZoomLevels: totalNumZoomLevels,
-            controls: []
+            numZoomLevels: totalNumZoomLevels
         };
     }
 
@@ -125,7 +121,7 @@ public class Map {
 	private MapWidget parent;
 
 	public Map(Element mapDomElement, MapWidget parent, boolean speherical) {
-		this.map = _newInstance(mapDomElement, 20, speherical);
+		this.map = _newInstance(mapDomElement, 14, speherical);
 		this.parent = parent;
 	}
 
