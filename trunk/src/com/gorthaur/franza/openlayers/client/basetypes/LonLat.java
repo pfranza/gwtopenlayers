@@ -11,11 +11,11 @@ public class LonLat {
 	}
 	
  	public double getLongitude() {
-		return lat;
+		return lon;
 	}
 
 	public double getLatitude() {
-		return lon;
+		return lat;
 	}
 
 }

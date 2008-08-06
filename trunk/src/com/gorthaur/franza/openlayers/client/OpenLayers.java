@@ -40,7 +40,7 @@ public class OpenLayers implements EntryPoint {
 //			map.getMap().panTo(new LonLat(18, 34));
 //			OverviewMap ov = new OverviewMap(new Google(Google.TYPE.NORMAL, "Overview",  true));
 //			map.getMap().addControl(ov);
-			ml.addMarker(new IconMarker(new Icon("http://boston.openguides.org/markers/AQUA.png",new Size(10, 17), new Pixel(5, 8)), new LonLat(35, 18)));
+			ml.addMarker(new IconMarker(new Icon("http://boston.openguides.org/markers/AQUA.png",new Size(10, 17), new Pixel(0, 0)), new LonLat( -76.207844, 36.756947)));
 			map.getMap().addControl(new NavToolBar());
 //			map.getMap().addControl(new PanZoomBar());
 //			map.getMap().addControl(new LayerSwitcher());
