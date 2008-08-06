@@ -12,7 +12,6 @@ public class IconMarker extends Marker{
 
 	private native static JavaScriptObject _newInstance(JavaScriptObject icon,
 			double lon, double lat) /*-{
-			$wnd.alert(lon);
 		return new $wnd.OpenLayers.Marker(new $wnd.OpenLayers.LonLat(lon,lat),icon)
 	}-*/;
 	
