@@ -6,9 +6,12 @@ import com.gorthaur.franza.openlayers.client.basetypes.LonLat;
 
 public class IconMarker extends Marker{
 
+	private LonLat loc;
+
 	public IconMarker(Icon icon, LonLat ll) {
 		super(_newInstance(icon.getIconClone(), ll.getLongitude(), ll.getLatitude())); 
 		_registerListeners(this, getJsObject());
+		this.loc = ll;
 	}
 
 	private native void _registerListeners(IconMarker m, JavaScriptObject marker) /*-{
@@ -26,6 +29,18 @@ public class IconMarker extends Marker{
 	private native static JavaScriptObject _newInstance(JavaScriptObject icon,
 			double lon, double lat) /*-{
 		return new $wnd.OpenLayers.Marker(new $wnd.OpenLayers.LonLat(lon,lat),icon);
+	}-*/;
+	
+	public LonLat getLocation() {
+		return loc;
+	}
+	
+	public void destroy() {
+		_destroy(getJsObject());
+	}
+	
+	private static native void _destroy(JavaScriptObject o) /*-{
+		o.destroy();
 	}-*/;
 	
 }
