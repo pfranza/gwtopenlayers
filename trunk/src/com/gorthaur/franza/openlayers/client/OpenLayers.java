@@ -12,10 +12,11 @@ import com.gorthaur.franza.openlayers.client.basetypes.LonLat;
 import com.gorthaur.franza.openlayers.client.basetypes.Pixel;
 import com.gorthaur.franza.openlayers.client.basetypes.Size;
 import com.gorthaur.franza.openlayers.client.controls.NavToolBar;
-import com.gorthaur.franza.openlayers.client.controls.OverviewMap;
 import com.gorthaur.franza.openlayers.client.layers.Google;
 import com.gorthaur.franza.openlayers.client.layers.MarkerLayer;
 import com.gorthaur.franza.openlayers.client.markers.IconMarker;
+import com.gorthaur.franza.openlayers.client.markers.Marker;
+import com.gorthaur.franza.openlayers.client.markers.Marker.MarkerClickEventHandler;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -42,7 +43,15 @@ public class OpenLayers implements EntryPoint {
 //			map.getMap().panTo(new LonLat(18, 34));
 //			OverviewMap ov = new OverviewMap(new Google(Google.TYPE.NORMAL, "Overview",  true));
 //			map.getMap().addControl(ov);
-			ml.addMarker(new IconMarker(new Icon("http://boston.openguides.org/markers/AQUA.png",new Size(10, 17), new Pixel(0, 0)), new LonLat( -76.207844, 36.756947)));
+			IconMarker marker = new IconMarker(new Icon("http://boston.openguides.org/markers/AQUA.png",new Size(10, 17), new Pixel(0, 0)), new LonLat( -76.207844, 36.756947));
+			marker.add(new MarkerClickEventHandler() {
+
+				public void markerClicked(Marker m) {
+					System.out.println("Marker Clicked");
+				}
+				
+			});
+			ml.addMarker(marker);
 			map.getMap().addControl(new NavToolBar());
 //			map.getMap().addControl(new PanZoomBar());
 //			map.getMap().addControl(new LayerSwitcher());

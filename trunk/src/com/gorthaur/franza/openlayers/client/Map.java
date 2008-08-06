@@ -39,7 +39,7 @@ public class Map {
                 
         function mapEvent(e) { 
             m.@com.gorthaur.franza.openlayers.client.Map::fireMoveListeners()();
-        }
+        };
        
         var map =  new $wnd.OpenLayers.Map(mapDomElement);
         map.events.register("moveend", null, mapEvent);
