@@ -2,7 +2,7 @@
 
       <!-- Inherit the core Web Toolkit stuff.                        -->
       <inherits name='com.google.gwt.user.User'/>
-      <entry-point class='com.gorthaur.franza.openlayers.client.OpenLayers'/>
+      <!-- entry-point class='com.gorthaur.franza.openlayers.client.OpenLayers'/-->
       <script src="http://www.openlayers.org/api/OpenLayers.js"/>
 	
 </module>
