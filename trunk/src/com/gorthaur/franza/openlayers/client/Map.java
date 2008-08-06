@@ -7,6 +7,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.gorthaur.franza.openlayers.client.basetypes.Bounds;
 import com.gorthaur.franza.openlayers.client.basetypes.LonLat;
+import com.gorthaur.franza.openlayers.client.basetypes.Pixel;
 import com.gorthaur.franza.openlayers.client.controls.Control;
 import com.gorthaur.franza.openlayers.client.layers.Layer;
 
@@ -34,26 +35,16 @@ public class Map {
     return map.getZoom();
 	}-*/;
 
-	private static native JavaScriptObject _newInstance(Element mapDomElement, int totalNumZoomLevels, boolean isSphericalMercator) /*-{
+	private static native JavaScriptObject _newInstance(Map m, Element mapDomElement, int totalNumZoomLevels, boolean isSphericalMercator) /*-{
+                
+        function mapEvent(e) { 
+            m.@com.gorthaur.franza.openlayers.client.Map::fireMoveListeners()();
+        }
+       
+        var map =  new $wnd.OpenLayers.Map(mapDomElement);
+        map.events.register("moveend", null, mapEvent);
 
-    var mapOptions;
-    if(isSphericalMercator) {
-        mapOptions = {
-            numZoomLevels: totalNumZoomLevels,
-            projection: new $wnd.OpenLayers.Projection("EPSG:900913"),
-            displayProjection: new $wnd.OpenLayers.Projection("EPSG:4326"),
-            units: "m",
-            controls: []
-        };
-    } else {
-        mapOptions = {
-            numZoomLevels: totalNumZoomLevels,
-            controls: []
-        };
-    }
-
-    var map = new $wnd.OpenLayers.Map(mapDomElement, mapOptions);
-    return map;
+        return map;
 	}-*/;
 
 	private native void _addClickListener(JavaScriptObject map, Map m) /*-{
@@ -123,7 +114,7 @@ public class Map {
 	private MapWidget parent;
 
 	public Map(Element mapDomElement, MapWidget parent, boolean speherical) {
-		this.map = _newInstance(mapDomElement, 14, speherical);
+		this.map = _newInstance(this, mapDomElement, 14, speherical);
 		this.parent = parent;
 	}
 
@@ -171,22 +162,22 @@ public class Map {
 		return map;
 	}
 	
-//	public LonLat getLonLatFromPixel(Pixel p) {
-//		return new LonLat(_getLonFromPixel(map, p.getX(), p.getY()), _getLatFromPixel(map, p.getX(), p.getY()));
-//	}
+	public LonLat getLonLatFromPixel(Pixel p) {
+		return new LonLat(_getLonFromPixel(map, p.getX(), p.getY()), _getLatFromPixel(map, p.getX(), p.getY()));
+	}
 
 	public void setCenter(LonLat ll, int zoom, boolean dragging, boolean forceZoomChange) {
 		_setCenter(map, ll.getLongitude(), ll.getLatitude(), zoom, dragging, forceZoomChange);
 		fireMoveListeners();
 	}
 	
-//	private native double _getLonFromPixel(JavaScriptObject o, int x, int y) /*-{
-//    	return o.getLonLatFromPixel(new $wnd.OpenLayers.Pixel(x, y)).lon;
-//	}-*/;
-//
-//	private native double _getLatFromPixel(JavaScriptObject o, int x, int y) /*-{
-//    	return o.getLonLatFromPixel(new $wnd.OpenLayers.Pixel(x, y)).lat;
-//	}-*/;
+	private native double _getLonFromPixel(JavaScriptObject o, int x, int y) /*-{
+    	return o.getLonLatFromPixel(new $wnd.OpenLayers.Pixel(x, y)).lon;
+	}-*/;
+
+	private native double _getLatFromPixel(JavaScriptObject o, int x, int y) /*-{
+    	return o.getLonLatFromPixel(new $wnd.OpenLayers.Pixel(x, y)).lat;
+	}-*/;
 
 	public void addClickListener(MapClickListener mouseListener) {
 		if(listeners.isEmpty()) {
@@ -202,8 +193,8 @@ public class Map {
 	
 	public Bounds getExtent() {
 		Bounds b =  new Bounds();
-			b.extend(new LonLat(_getLowerLonBound(map), _getUpperLatBound(map)));
-			b.extend(new LonLat(_getUpperLonBound(map), _getLowerLatBound(map)));
+			b.extend(new LonLat(_getLowerLonBound(map), _getLowerLatBound(map)));
+			b.extend(new LonLat(_getUpperLonBound(map), _getUpperLatBound(map)));
 		return b;
 	}
 	
@@ -215,7 +206,7 @@ public class Map {
 		return o.getExtent().toArray()[2];
 	}-*/;
 	
-	private native float _getLowerLatBound(JavaScriptObject o)  /*-{
+	private native double _getLowerLatBound(JavaScriptObject o)  /*-{
 		return o.getExtent().toArray()[1];
 	}-*/;
 
@@ -238,6 +229,22 @@ public class Map {
 		}
 	}
 	
+	public void zoomToMaxExtent() {
+		_zoomToMaxExtent(map);
+	}
+	
+	private static native void _zoomToMaxExtent(JavaScriptObject m)  /*-{
+		m.zoomToMaxExtent();
+	}-*/;
+	
+//	public void zoomToExtent(Bounds bounds) {
+//		_zoomToExtent(map, bounds.getJsObject());
+//	}
+//	
+//	private static native void _zoomToExtent(JavaScriptObject m)  /*-{
+//		m.zoomToMaxExtent();
+//	}-*/;
+
 	public interface MapClickListener {		
 		void mapClicked(LonLat position);
 	}
