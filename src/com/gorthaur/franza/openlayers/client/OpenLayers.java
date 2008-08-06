@@ -5,6 +5,8 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.gorthaur.franza.openlayers.client.Map.MapMoveListener;
+import com.gorthaur.franza.openlayers.client.basetypes.Bounds;
 import com.gorthaur.franza.openlayers.client.basetypes.Icon;
 import com.gorthaur.franza.openlayers.client.basetypes.LonLat;
 import com.gorthaur.franza.openlayers.client.basetypes.Pixel;
@@ -48,6 +50,19 @@ public class OpenLayers implements EntryPoint {
 //			ov.addControl(new NavToolBar());
 //			ov.addLayer(new Google(Google.TYPE.NORMAL, "Overview",  true));
 //			, 'size': new $wnd.OpenLayers.Size(width, height)
+			
+//		map.getMap().zoomToMaxExtent();
+			
+		map.getMap().addMapListener(new MapMoveListener() {
+
+			public void mapMoved(LonLat center, int zoomLevel,
+					Bounds boundingBox) {
+				System.out.println("Move Complete " + boundingBox);
+				System.out.println("Center: " + center);
+				System.out.println("ZoomLevel: " + zoomLevel);
+			}
+			
+		});
 			
 		RootPanel.get().add(map);
 		Timer t = new Timer() {

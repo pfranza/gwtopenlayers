@@ -17,5 +17,10 @@ public class LonLat {
 	public double getLatitude() {
 		return lat;
 	}
+	
+	@Override
+	public String toString() {
+		return "Lat: " + lat + " Lon: " + lon;
+	}
 
 }
